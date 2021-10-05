@@ -3,6 +3,8 @@ package com.dantas.strategicplanning.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -13,9 +15,11 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
     private String description;
 
     @ManyToOne
     @JoinColumn
+    @NotNull
     private Organization organization;
 }
