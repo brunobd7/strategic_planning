@@ -19,7 +19,7 @@ public class Department {
     private String description;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "organization_id")
     @NotNull
     private Organization organization;
 }
