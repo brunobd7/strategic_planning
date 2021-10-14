@@ -1,34 +1,27 @@
 package com.dantas.strategicplanning.model;
 
-import com.dantas.strategicplanning.enums.UnitMeasurement;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import javax.validation.constraints.Size;
 
-//HIBERNATE STRATEGY TO INHERITANCE WITH ONLY CLASSES 'CHILDREN' IN ENTITY MODEL
 @Data
-@MappedSuperclass
-public class Objective {
+@Entity
+@Table(name = "bsc_perspective")
+public class BscPerspective {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    private BigDecimal goal;
+    private String description;
 
-    private LocalDate deadLine;
-
-    @ManyToOne
-    @JoinColumn(name = "department_id")
     @NotNull
-    private Department department;
-
-    @Enumerated(EnumType.ORDINAL)
-    private UnitMeasurement unitMeasurement;
+    @Size(min = 1 , max = 100)
+    private Integer weight;
 
     @ManyToOne
     @JoinColumn(name = "base_date_id")
