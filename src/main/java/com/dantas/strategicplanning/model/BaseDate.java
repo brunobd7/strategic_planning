@@ -13,6 +13,7 @@ import java.time.LocalDate;
 public class BaseDate {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull

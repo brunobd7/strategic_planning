@@ -1,6 +1,6 @@
 create table if not exists users
 (
-    id serial
+    id bigserial
         constraint users_pk
             primary key,
     login varchar,
@@ -8,5 +8,5 @@ create table if not exists users
     organization_id integer
 );
 
-insert into users(login,password,organization_id) values ('admin',123);
+insert into users(login,password,organization_id) values ('admin',123,1);
 

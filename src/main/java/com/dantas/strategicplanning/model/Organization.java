@@ -17,7 +17,7 @@ public class Organization {
 
     @Column(name="register_number")
     @NotNull
-    private String registerNumeber;
+    private String registerNumber;
 
     @Column(name = "corporate_name")
     @NotNull
