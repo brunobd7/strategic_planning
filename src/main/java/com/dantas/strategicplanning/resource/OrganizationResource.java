@@ -32,4 +32,11 @@ public class OrganizationResource {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(organizationCreated);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Organization> deleteOrgById(@PathVariable Long id){
+        organizationRepository.deleteById(id);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }
