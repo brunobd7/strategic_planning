@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/organizations")
@@ -24,6 +25,15 @@ public class OrganizationResource {
     @GetMapping
     public List<Organization> listAll(){
         return organizationRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Organization> findOrgById(@PathVariable Long id){
+
+        Organization orgFounded = organizationRepository.findById(id).orElse(null);
+
+        return Objects.nonNull(orgFounded) ? ResponseEntity.ok(orgFounded) : ResponseEntity.noContent().build();
+
     }
 
 
@@ -45,7 +55,7 @@ public class OrganizationResource {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Organization> deleteOrgById(@PathVariable Long id){
+    public ResponseEntity deleteOrgById(@PathVariable Long id){
         organizationRepository.deleteById(id);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
