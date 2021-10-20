@@ -2,6 +2,7 @@ package com.dantas.strategicplanning.resource;
 
 import com.dantas.strategicplanning.model.Organization;
 import com.dantas.strategicplanning.repository.OrganizationRepository;
+import com.dantas.strategicplanning.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,8 @@ public class OrganizationResource {
     @Autowired
     OrganizationRepository organizationRepository;
 
+    @Autowired
+    OrganizationService organizationService;
 
     @GetMapping
     public List<Organization> listAll(){
@@ -31,6 +34,14 @@ public class OrganizationResource {
         Organization organizationCreated = organizationRepository.save(organization);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(organizationCreated);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Organization> updateOrganization(@PathVariable Long id , @Valid @RequestBody Organization organization){
+
+        Organization updatedOrganization = organizationService.updateOrganizationProperties(id,organization);
+
+        return ResponseEntity.status(HttpStatus.OK).body(updatedOrganization);
     }
 
     @DeleteMapping("/{id}")
