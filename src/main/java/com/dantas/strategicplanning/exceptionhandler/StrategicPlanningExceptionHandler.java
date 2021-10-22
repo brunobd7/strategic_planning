@@ -15,7 +15,11 @@ public class StrategicPlanningExceptionHandler extends ResponseEntityExceptionHa
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 
+        //TODO CUSTOMIZE EXCEPTION FOR REQUIRE FIELDS EX : 'NOT EMPTY' OR NOT NULL ANNOTATION
         return handleExceptionInternal(ex,"MENSAGEM INVALIDA - CAMPOS INVALIDOS",headers,HttpStatus.BAD_REQUEST,request);
 //        return handleExceptionInternal(ex,body,headers,status,request);
     }
+
+    //TODO HANDLE OTHERS COMMONS EXCEPTION 'ARGUMENTS NOT VALIDS' , 'EMPTY DATA ACCESS' NOT FIND ON GETS
+    // AND 'INTEGRITY' TO DELETE METHODS ENVOLVES FK IN RESOURCES
 }
