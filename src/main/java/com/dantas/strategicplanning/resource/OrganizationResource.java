@@ -57,7 +57,6 @@ public class OrganizationResource {
     @DeleteMapping("/{id}")
     public ResponseEntity deleteOrgById(@PathVariable Long id){
         organizationRepository.deleteById(id);
-
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
