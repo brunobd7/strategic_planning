@@ -2,6 +2,7 @@ package com.dantas.strategicplanning.resource;
 
 import com.dantas.strategicplanning.model.BaseDate;
 import com.dantas.strategicplanning.repository.BaseDateRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -55,6 +56,19 @@ public class BaseDateResource {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBaseDateById(@PathVariable Long id){
         baseDateRepository.deleteById(id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<BaseDate> updateBaseDate(@Valid @RequestBody BaseDate baseDateUpdated , @PathVariable Long id ){
+
+        BaseDate baseSaved = baseDateRepository.findById(id).orElseThrow(() -> new EmptyResultDataAccessException(1));
+
+        BeanUtils.copyProperties(baseDateUpdated,baseSaved,"id");
+
+         baseSaved = baseDateRepository.save(baseSaved);
+
+//         return ResponseEntity.status(HttpStatus.OK).body(baseSaved);
+         return ResponseEntity.ok(baseSaved);
     }
 
 }
