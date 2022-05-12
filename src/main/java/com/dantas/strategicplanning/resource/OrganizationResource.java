@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,12 +41,15 @@ public class OrganizationResource {
 
 
     @PostMapping
-    public ResponseEntity<Organization> createOrganization(@Valid @RequestBody Organization organization){
+    public ResponseEntity<Organization> createOrganization(@Valid @RequestBody Organization organization, HttpServletResponse response){
 
-        //todo refactor to return location into response header using httpServletResponse.
+        // TODO Apply spring events / publishing  always on create any resource into application
         Organization organizationCreated = organizationRepository.save(organization);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
+                .buildAndExpand(organizationCreated.getId()).toUri();
+//        response.setHeader("Location", uri.toASCIIString());
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(organizationCreated);
+        return ResponseEntity.created(uri).body(organizationCreated);
     }
 
     @PutMapping("/{id}")
