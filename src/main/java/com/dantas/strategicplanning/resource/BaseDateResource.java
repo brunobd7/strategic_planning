@@ -44,7 +44,7 @@ public class BaseDateResource {
 
     @GetMapping("/{id}")
     public ResponseEntity<BaseDate> findById(@PathVariable Long id){
-        //TODO HANDLE CUSTOM MESSAGE USING messages.properties AND GLOBAL HANDLE EXCPTION COMPONENT
+        //TODO HANDLE CUSTOM MESSAGE USING messages.properties, ValidationMessages.properties AND GLOBAL HANDLE EXCPTION COMPONENT
         //return baseDateRepository.findById(id).orElseThrow(() -> new EmptyResultDataAccessException(1));
         BaseDate baseDateFounded = baseDateRepository.findById(id).orElse(null);
         return Objects.isNull(baseDateFounded)
