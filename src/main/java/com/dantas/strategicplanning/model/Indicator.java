@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Data
 @Entity
@@ -23,4 +24,7 @@ public class Indicator {
     @Size(min = 5, max = 100)
     private String name;
 
+    //Property mapped in object of relationship with same name.
+    @ManyToMany(mappedBy = "indicatorsObjective")
+    Set<BscObjective> bscObjectives ;
 }

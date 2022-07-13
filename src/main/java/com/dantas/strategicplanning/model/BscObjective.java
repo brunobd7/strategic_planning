@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Data
 @Entity
@@ -23,5 +24,13 @@ public class BscObjective extends Objective{
     @JoinColumn(name = "bsc_perspective_id")
     @NotNull
     private BscPerspective bscPerspective;
+
+    @ManyToMany
+    @JoinTable(
+            name = "objectives_indicators",
+            joinColumns = @JoinColumn(name = "bsc_objective_id"),
+            inverseJoinColumns = @JoinColumn(name = "indicator_id")
+    )
+    Set<Indicator> indicatorsObjective;
 
 }
