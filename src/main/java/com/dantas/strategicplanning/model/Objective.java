@@ -33,7 +33,7 @@ public class Objective {
     @NotNull
     private Department department;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private UnitMeasurement unitMeasurement;
 
     @ManyToOne

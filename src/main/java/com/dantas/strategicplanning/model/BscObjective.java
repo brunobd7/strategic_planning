@@ -16,7 +16,7 @@ public class BscObjective extends Objective{
     @Size(min = 1 , max = 100)
     private Integer weight;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private Level level;
 
     @ManyToOne
