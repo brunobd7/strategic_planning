@@ -4,7 +4,9 @@ import com.dantas.strategicplanning.enums.UnitMeasurement;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -19,6 +21,10 @@ public class Objective {
 
     @NotNull
     private BigDecimal goal;
+
+    @NotNull
+    @Size(min = 5, max = 100)
+    private String description;
 
     private LocalDate deadLine;
 
